@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib
 import json
 
-# Custom, locally stored Packages, just for better structuring
+# Custom, locally stored helper, just for better structuring
 from helper_calculations.clustering import apply_kMeans_clustering_2D
 from helper_calculations.feature_extraction import apply_linear_feature_extraction, apply_non_lin_feature_extraction
 from helper_calculations.fourier_transformation import apply_fourier_transformation
@@ -17,14 +17,7 @@ matplotlib.rcParams.update({
  	'pgf.rcfonts': False,
  })
 
-# TODO: Folderstructure for results
-# TODO: Automatic Labeling @ Plots
-# TODO: Multi-Dim-Cluster!!!
-# TODO: Opt: Sampling Frequency in Fourier
-# TODO: Fourier for each Cluster
-# TODO: Make app scaleable
-
-# Function that checks the provided raw data to catch potential exceptions/problems in advance.
+# Function that loads rawData and performances quality checks in order to avoid incompatibilty with algorithms later on.
 def load_rawData(path: str) -> pd.DataFrame:
 	df_rawData = pd.read_csv(path,sep=",")
 	# TODO: Tests for data quality
@@ -34,6 +27,8 @@ def load_rawData(path: str) -> pd.DataFrame:
 def find_outliers_in_raw_data(df_raw_data:pd.DataFrame):
 	print("Please integrate the mahalanobis distance here :) ")
 	# TODO: Do me :)
+
+
 # Function that runs the entire algorithm based on the program-graph as shown in the readme file
 def find_patterns_in_outlier(df_outlier_data: pd.DataFrame, label) -> dict:
 	dict_solutions = {}
@@ -41,7 +36,8 @@ def find_patterns_in_outlier(df_outlier_data: pd.DataFrame, label) -> dict:
 	dict_result_fourier = {}
 
 	# ======== Step 0: General Data Preperation ========
-	print(" ==== Step 0: General Data Preperation ====")
+	print(" ==== Step 0: Data Preperation ====")
+	
 	# 1. Branch -  No Transformation/Initial Feature Extraction. Just Fourier- and k-Means Clustering:
 	df_sol_non_trans = df_outlier_data.copy()
 
